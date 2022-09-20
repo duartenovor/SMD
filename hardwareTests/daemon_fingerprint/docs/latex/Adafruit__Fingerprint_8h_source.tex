@@ -1,0 +1,163 @@
+\hypertarget{Adafruit__Fingerprint_8h_source}{}\doxysection{Adafruit\+\_\+\+Fingerprint.\+h}
+\label{Adafruit__Fingerprint_8h_source}\index{includes/Adafruit\_Fingerprint.h@{includes/Adafruit\_Fingerprint.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef ADAFRUIT\_FINGERPRINT\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define ADAFRUIT\_FINGERPRINT\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}uart.h"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#define FINGERPRINT\_OK 0x00               }}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#define FINGERPRINT\_PACKETRECIEVEERR 0x01 }}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#define FINGERPRINT\_NOFINGER 0x02         }}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#define FINGERPRINT\_IMAGEFAIL 0x03        }}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define FINGERPRINT\_IMAGEMESS                                                  \(\backslash\)}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{  0x06 }}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#define FINGERPRINT\_FEATUREFAIL                                                \(\backslash\)}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{  0x07 }}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define FINGERPRINT\_NOMATCH 0x08  }}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#define FINGERPRINT\_NOTFOUND 0x09 }}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define FINGERPRINT\_ENROLLMISMATCH                                             \(\backslash\)}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{  0x0A }}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define FINGERPRINT\_BADLOCATION                                                \(\backslash\)}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{  0x0B }}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define FINGERPRINT\_DBRANGEFAIL                                                \(\backslash\)}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{  0x0C }}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define FINGERPRINT\_UPLOADFEATUREFAIL 0x0D }}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#define FINGERPRINT\_PACKETRESPONSEFAIL                                         \(\backslash\)}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{  0x0E }}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define FINGERPRINT\_UPLOADFAIL 0x0F  }}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#define FINGERPRINT\_DELETEFAIL 0x10  }}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#define FINGERPRINT\_DBCLEARFAIL 0x11 }}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define FINGERPRINT\_PASSFAIL                                                   \(\backslash\)}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{  0x13 }}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define FINGERPRINT\_INVALIDIMAGE                                               \(\backslash\)}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{  0x15 }}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define FINGERPRINT\_FLASHERR 0x18   }}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define FINGERPRINT\_INVALIDREG 0x1A }}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define FINGERPRINT\_ADDRCODE 0x20   }}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define FINGERPRINT\_PASSVERIFY 0x21 }}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#define FINGERPRINT\_STARTCODE                                                  \(\backslash\)}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{  0xEF01 }}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#define FINGERPRINT\_COMMANDPACKET 0x1 }}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#define FINGERPRINT\_DATAPACKET                                                 \(\backslash\)}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{  0x2 }}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#define FINGERPRINT\_ACKPACKET 0x7     }}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#define FINGERPRINT\_ENDDATAPACKET 0x8 }}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#define FINGERPRINT\_TIMEOUT 0xFF   }}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#define FINGERPRINT\_BADPACKET 0xFE }}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define FINGERPRINT\_GETIMAGE 0x01 }}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#define FINGERPRINT\_IMAGE2TZ 0x02 }}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#define FINGERPRINT\_SEARCH 0x04   }}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#define FINGERPRINT\_REGMODEL                                                   \(\backslash\)}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{  0x05 }}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define FINGERPRINT\_STORE 0x06          }}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#define FINGERPRINT\_LOAD 0x07           }}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#define FINGERPRINT\_UPLOAD 0x08         }}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#define FINGERPRINT\_DELETE 0x0C         }}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#define FINGERPRINT\_EMPTY 0x0D          }}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define FINGERPRINT\_READSYSPARAM 0x0F   }}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#define FINGERPRINT\_SETPASSWORD 0x12    }}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#define FINGERPRINT\_VERIFYPASSWORD 0x13 }}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#define FINGERPRINT\_HISPEEDSEARCH                                              \(\backslash\)}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{  0x1B }}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define FINGERPRINT\_TEMPLATECOUNT 0x1D }}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#define FINGERPRINT\_AURALEDCONFIG 0x35 }}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#define FINGERPRINT\_LEDON 0x50         }}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#define FINGERPRINT\_LEDOFF 0x51        }}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#define FINGERPRINT\_LED\_BREATHING 0x01   }}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#define FINGERPRINT\_LED\_FLASHING 0x02    }}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#define FINGERPRINT\_LED\_ON 0x03          }}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#define FINGERPRINT\_LED\_OFF 0x04         }}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#define FINGERPRINT\_LED\_GRADUAL\_ON 0x05  }}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#define FINGERPRINT\_LED\_GRADUAL\_OFF 0x06 }}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#define FINGERPRINT\_LED\_RED 0x01         }}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#define FINGERPRINT\_LED\_BLUE 0x02        }}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define FINGERPRINT\_LED\_PURPLE 0x03      }}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{comment}{//\#define FINGERPRINT\_DEBUG}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#define DEFAULTTIMEOUT 5000 }}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 }
+\DoxyCodeLine{95 \textcolor{keyword}{struct }\mbox{\hyperlink{structAdafruit__Fingerprint__Packet}{Adafruit\_Fingerprint\_Packet}} \{}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{comment}{  /**************************************************************************/}}
+\DoxyCodeLine{105 \textcolor{comment}{  /**************************************************************************/}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107   \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a579e2e548a944cdc3a84f6cc5c62eee1}{Adafruit\_Fingerprint\_Packet}}(uint8\_t \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_aecdfd7a76ef41f265e3e684ef5398a38}{type}}, uint16\_t \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_ab6cee6fbb3fdabf8ad3fc692cdb32e13}{length}}, uint8\_t *\mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a46a35b2aaa8320ad4afe55696918ac12}{data}}) \{}
+\DoxyCodeLine{108     this-\/>\mbox{\hyperlink{structAdafruit__Fingerprint__Packet_af580edb11a176e22cdcac6475a0a754e}{start\_code}} = FINGERPRINT\_STARTCODE;}
+\DoxyCodeLine{109     this-\/>type = \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_aecdfd7a76ef41f265e3e684ef5398a38}{type}};}
+\DoxyCodeLine{110     this-\/>length = \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_ab6cee6fbb3fdabf8ad3fc692cdb32e13}{length}};}
+\DoxyCodeLine{111     \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a9b2ba91c550108b443a9113cf387f060}{address}}[0] = 0xFF;}
+\DoxyCodeLine{112     \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a9b2ba91c550108b443a9113cf387f060}{address}}[1] = 0xFF;}
+\DoxyCodeLine{113     \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a9b2ba91c550108b443a9113cf387f060}{address}}[2] = 0xFF;}
+\DoxyCodeLine{114     \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a9b2ba91c550108b443a9113cf387f060}{address}}[3] = 0xFF;}
+\DoxyCodeLine{115     \textcolor{keywordflow}{if} (\mbox{\hyperlink{structAdafruit__Fingerprint__Packet_ab6cee6fbb3fdabf8ad3fc692cdb32e13}{length}} < 64)}
+\DoxyCodeLine{116       memcpy(this-\/>data, \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a46a35b2aaa8320ad4afe55696918ac12}{data}}, \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_ab6cee6fbb3fdabf8ad3fc692cdb32e13}{length}});}
+\DoxyCodeLine{117     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{118       memcpy(this-\/>data, \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a46a35b2aaa8320ad4afe55696918ac12}{data}}, 64);}
+\DoxyCodeLine{119   \}}
+\DoxyCodeLine{120   uint16\_t \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_af580edb11a176e22cdcac6475a0a754e}{start\_code}}; }
+\DoxyCodeLine{121   uint8\_t \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a9b2ba91c550108b443a9113cf387f060}{address}}[4];  }
+\DoxyCodeLine{122   uint8\_t \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_aecdfd7a76ef41f265e3e684ef5398a38}{type}};        }
+\DoxyCodeLine{123   uint16\_t \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_ab6cee6fbb3fdabf8ad3fc692cdb32e13}{length}};     }
+\DoxyCodeLine{124   uint8\_t \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a46a35b2aaa8320ad4afe55696918ac12}{data}}[64];    }
+\DoxyCodeLine{125 \};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128 \textcolor{keyword}{class }\mbox{\hyperlink{classAdafruit__Fingerprint}{Adafruit\_Fingerprint}} }
+\DoxyCodeLine{129 \{}
+\DoxyCodeLine{130   \textcolor{keyword}{public}:}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132     \mbox{\hyperlink{classAdafruit__Fingerprint_a3d65f013896d651003835cf05e427575}{Adafruit\_Fingerprint}}(\textcolor{keywordtype}{char}* device);}
+\DoxyCodeLine{133     \mbox{\hyperlink{classAdafruit__Fingerprint}{\string~Adafruit\_Fingerprint}}();}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     \textcolor{keywordtype}{void} \mbox{\hyperlink{classAdafruit__Fingerprint_a3f14b1002444a9a57c8275afb1a8202b}{begin}}(uint16\_t baud);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classAdafruit__Fingerprint_ae8d5776a5f109d93de9aa7830f2b1930}{verifyPassword}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139     uint8\_t \mbox{\hyperlink{classAdafruit__Fingerprint_a828ce078a1bbd3c8295792ac946eef56}{getImage}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{140     uint8\_t \mbox{\hyperlink{classAdafruit__Fingerprint_adf222c3c7bba96f916729a8c9d213aa8}{image2Tz}}(uint8\_t slot = 1);}
+\DoxyCodeLine{141     uint8\_t \mbox{\hyperlink{classAdafruit__Fingerprint_a79d36eb63d36c60ab43198ac47120f76}{createModel}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     uint8\_t \mbox{\hyperlink{classAdafruit__Fingerprint_a1f68560eee38714be3b57fa1d191d67a}{emptyDatabase}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{144     uint8\_t \mbox{\hyperlink{classAdafruit__Fingerprint_a14d8097e5ce038322913b43e026427e5}{storeModel}}(uint16\_t \textcolor{keywordtype}{id});}
+\DoxyCodeLine{145     uint8\_t \mbox{\hyperlink{classAdafruit__Fingerprint_a4bac8a559ccbfecf91b3e716adab409a}{loadModel}}(uint16\_t \textcolor{keywordtype}{id});}
+\DoxyCodeLine{146     uint8\_t \mbox{\hyperlink{classAdafruit__Fingerprint_a51c5c11fd3252a8144f878b7f5a8a0d1}{getModel}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{147     uint8\_t \mbox{\hyperlink{classAdafruit__Fingerprint_a69d8b605f297a71f924dd71b8db075b1}{deleteModel}}(uint16\_t \textcolor{keywordtype}{id});}
+\DoxyCodeLine{148     uint8\_t \mbox{\hyperlink{classAdafruit__Fingerprint_a8507ddc13aa2697779740e5fade9db1a}{fingerFastSearch}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{149     uint8\_t fingerSearch(uint8\_t slot = 1);}
+\DoxyCodeLine{150     uint8\_t \mbox{\hyperlink{classAdafruit__Fingerprint_abe95ce86618b6cd0f4c6fbcd1e4da8d0}{getTemplateCount}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{151    }
+\DoxyCodeLine{152     uint8\_t getReply(uint8\_t packet[], uint16\_t timeout=DEFAULTTIMEOUT);}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154     \textcolor{keywordtype}{void} \mbox{\hyperlink{classAdafruit__Fingerprint_a4c9b787413658ad02a23f4afd0fad658}{writeStructuredPacket}}(\textcolor{keyword}{const} \mbox{\hyperlink{structAdafruit__Fingerprint__Packet}{Adafruit\_Fingerprint\_Packet}} \&p);}
+\DoxyCodeLine{155     uint8\_t \mbox{\hyperlink{classAdafruit__Fingerprint_a6ce9182a12492ce9f39807fad197985d}{getStructuredPacket}}(\mbox{\hyperlink{structAdafruit__Fingerprint__Packet}{Adafruit\_Fingerprint\_Packet}} *p,}
+\DoxyCodeLine{156                               uint16\_t timeout = DEFAULTTIMEOUT);}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{159     uint16\_t \mbox{\hyperlink{classAdafruit__Fingerprint_ad07bc0a05aff5467781e6c87bf1292e9}{fingerID}};}
+\DoxyCodeLine{162     uint16\_t \mbox{\hyperlink{classAdafruit__Fingerprint_aa0a2aecc94edcce3d4717b51e22114e1}{confidence}};}
+\DoxyCodeLine{164     uint16\_t \mbox{\hyperlink{classAdafruit__Fingerprint_a68837582d19bf6a85ab280d49eb6507e}{templateCount}};}
+\DoxyCodeLine{165     uint16\_t capacity = 64;}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167   \textcolor{keyword}{private}:}
+\DoxyCodeLine{168     uint8\_t checkPassword(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{169     uint32\_t thePassword;}
+\DoxyCodeLine{170     uint32\_t theAddress;}
+\DoxyCodeLine{171     uint8\_t recvPacket[20];}
+\DoxyCodeLine{172     \mbox{\hyperlink{classHardwareSerial}{HardwareSerial}} *mySerial;}
+\DoxyCodeLine{173   }
+\DoxyCodeLine{174 \};}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADAFRUIT\_FINGERPRINT\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

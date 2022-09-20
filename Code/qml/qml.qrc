@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Font/Font.qrc</file>
+        <file>Font/OpenSans-Bold.ttf</file>
+        <file>pages/pinPage.qml</file>
+        <file>pages/patientPage.qml</file>
+        <file>pages/notificationPage.qml</file>
+        <file>pages/medicationPage.qml</file>
+        <file>pages/mainMenuPage.qml</file>
+        <file>pages/main.qml</file>
+        <file>pages/initialPage.qml</file>
+        <file>pages/caregiverPage.qml</file>
+        <file>pages/textPage.qml</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,356 @@
+\hypertarget{classAdafruit__Fingerprint}{}\doxysection{Adafruit\+\_\+\+Fingerprint Class Reference}
+\label{classAdafruit__Fingerprint}\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classAdafruit__Fingerprint_a3d65f013896d651003835cf05e427575}{Adafruit\+\_\+\+Fingerprint}} (char $\ast$device)
+\begin{DoxyCompactList}\small\item\em Instantiates sensor with Hardware Serial. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classAdafruit__Fingerprint_a3f14b1002444a9a57c8275afb1a8202b}{begin}} (uint16\+\_\+t baud)
+\begin{DoxyCompactList}\small\item\em Initializes serial interface and baud rate. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classAdafruit__Fingerprint_ae8d5776a5f109d93de9aa7830f2b1930}{verify\+Password}} (void)
+\begin{DoxyCompactList}\small\item\em Verifies the sensors\textquotesingle{} access password (default password is 0x0000000). A good way to also check if the sensors is active and responding. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_a828ce078a1bbd3c8295792ac946eef56}{get\+Image}} (void)
+\begin{DoxyCompactList}\small\item\em Ask the sensor to take an image of the finger pressed on surface. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_adf222c3c7bba96f916729a8c9d213aa8}{image2\+Tz}} (uint8\+\_\+t slot=1)
+\begin{DoxyCompactList}\small\item\em Ask the sensor to convert image to feature template. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_a79d36eb63d36c60ab43198ac47120f76}{create\+Model}} (void)
+\begin{DoxyCompactList}\small\item\em Ask the sensor to take two print feature template and create a model. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_a1f68560eee38714be3b57fa1d191d67a}{empty\+Database}} (void)
+\begin{DoxyCompactList}\small\item\em Ask the sensor to delete ALL models in memory. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_a14d8097e5ce038322913b43e026427e5}{store\+Model}} (uint16\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Ask the sensor to store the calculated model for later matching. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_a4bac8a559ccbfecf91b3e716adab409a}{load\+Model}} (uint16\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Ask the sensor to load a fingerprint model from flash into buffer 1. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_a51c5c11fd3252a8144f878b7f5a8a0d1}{get\+Model}} (void)
+\begin{DoxyCompactList}\small\item\em Ask the sensor to transfer 256-\/byte fingerprint template from the buffer to the UART. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_a69d8b605f297a71f924dd71b8db075b1}{delete\+Model}} (uint16\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Ask the sensor to delete a model in memory. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_a8507ddc13aa2697779740e5fade9db1a}{finger\+Fast\+Search}} (void)
+\begin{DoxyCompactList}\small\item\em Ask the sensor to search the current slot 1 fingerprint features to match saved templates. The matching location is stored in {\bfseries{finger\+ID}} and the matching confidence in {\bfseries{confidence}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a3954d24f30799b752cb310ceacaa697e}\label{classAdafruit__Fingerprint_a3954d24f30799b752cb310ceacaa697e}} 
+uint8\+\_\+t {\bfseries finger\+Search} (uint8\+\_\+t slot=1)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_abe95ce86618b6cd0f4c6fbcd1e4da8d0}{get\+Template\+Count}} (void)
+\begin{DoxyCompactList}\small\item\em Ask the sensor for the number of templates stored in memory. The number is stored in {\bfseries{template\+Count}} on success. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAdafruit__Fingerprint_ad100910965f648bb058bb7491114bc43}\label{classAdafruit__Fingerprint_ad100910965f648bb058bb7491114bc43}} 
+uint8\+\_\+t {\bfseries get\+Reply} (uint8\+\_\+t packet\mbox{[}$\,$\mbox{]}, uint16\+\_\+t timeout=DEFAULTTIMEOUT)
+\item 
+void \mbox{\hyperlink{classAdafruit__Fingerprint_a4c9b787413658ad02a23f4afd0fad658}{write\+Structured\+Packet}} (const \mbox{\hyperlink{structAdafruit__Fingerprint__Packet}{Adafruit\+\_\+\+Fingerprint\+\_\+\+Packet}} \&p)
+\begin{DoxyCompactList}\small\item\em Helper function to process a packet and send it over UART to the sensor. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_a6ce9182a12492ce9f39807fad197985d}{get\+Structured\+Packet}} (\mbox{\hyperlink{structAdafruit__Fingerprint__Packet}{Adafruit\+\_\+\+Fingerprint\+\_\+\+Packet}} $\ast$p, uint16\+\_\+t timeout=DEFAULTTIMEOUT)
+\begin{DoxyCompactList}\small\item\em Helper function to receive data over UART from the sensor and process it into a packet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAdafruit__Fingerprint_ad07bc0a05aff5467781e6c87bf1292e9}\label{classAdafruit__Fingerprint_ad07bc0a05aff5467781e6c87bf1292e9}} 
+uint16\+\_\+t {\bfseries finger\+ID}
+\begin{DoxyCompactList}\small\item\em The matching location that is set by \mbox{\hyperlink{classAdafruit__Fingerprint_a8507ddc13aa2697779740e5fade9db1a}{finger\+Fast\+Search()}} \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classAdafruit__Fingerprint_aa0a2aecc94edcce3d4717b51e22114e1}{confidence}}
+\item 
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a68837582d19bf6a85ab280d49eb6507e}\label{classAdafruit__Fingerprint_a68837582d19bf6a85ab280d49eb6507e}} 
+uint16\+\_\+t {\bfseries template\+Count}
+\begin{DoxyCompactList}\small\item\em The number of stored templates in the sensor, set by \mbox{\hyperlink{classAdafruit__Fingerprint_abe95ce86618b6cd0f4c6fbcd1e4da8d0}{get\+Template\+Count()}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAdafruit__Fingerprint_aea2fd9ffbfc6aebd0aff05b08f925f1e}\label{classAdafruit__Fingerprint_aea2fd9ffbfc6aebd0aff05b08f925f1e}} 
+uint16\+\_\+t {\bfseries capacity} = 64
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a3d65f013896d651003835cf05e427575}\label{classAdafruit__Fingerprint_a3d65f013896d651003835cf05e427575}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{Adafruit\_Fingerprint()}{Adafruit\_Fingerprint()}}
+{\footnotesize\ttfamily Adafruit\+\_\+\+Fingerprint\+::\+Adafruit\+\_\+\+Fingerprint (\begin{DoxyParamCaption}\item[{char $\ast$}]{device }\end{DoxyParamCaption})}
+
+
+
+Instantiates sensor with Hardware Serial. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hs} & Pointer to \mbox{\hyperlink{classHardwareSerial}{Hardware\+Serial}} object \\
+\hline
+{\em password} & 32-\/bit integer password (default is 0) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a3f14b1002444a9a57c8275afb1a8202b}\label{classAdafruit__Fingerprint_a3f14b1002444a9a57c8275afb1a8202b}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!begin@{begin}}
+\index{begin@{begin}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily void Adafruit\+\_\+\+Fingerprint\+::begin (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{baudrate }\end{DoxyParamCaption})}
+
+
+
+Initializes serial interface and baud rate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em baudrate} & Sensor\textquotesingle{}s UART baud rate (usually 57600, 9600 or 115200) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a79d36eb63d36c60ab43198ac47120f76}\label{classAdafruit__Fingerprint_a79d36eb63d36c60ab43198ac47120f76}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!createModel@{createModel}}
+\index{createModel@{createModel}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{createModel()}{createModel()}}
+{\footnotesize\ttfamily uint8\+\_\+t Adafruit\+\_\+\+Fingerprint\+::create\+Model (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ask the sensor to take two print feature template and create a model. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily FINGERPRINT\+\_\+\+OK} on success 
+
+{\ttfamily FINGERPRINT\+\_\+\+PACKETRECIEVEERR} on communication error 
+
+{\ttfamily FINGERPRINT\+\_\+\+ENROLLMISMATCH} on mismatch of fingerprints 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a69d8b605f297a71f924dd71b8db075b1}\label{classAdafruit__Fingerprint_a69d8b605f297a71f924dd71b8db075b1}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!deleteModel@{deleteModel}}
+\index{deleteModel@{deleteModel}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{deleteModel()}{deleteModel()}}
+{\footnotesize\ttfamily uint8\+\_\+t Adafruit\+\_\+\+Fingerprint\+::delete\+Model (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{location }\end{DoxyParamCaption})}
+
+
+
+Ask the sensor to delete a model in memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The model location \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily FINGERPRINT\+\_\+\+OK} on success 
+
+{\ttfamily FINGERPRINT\+\_\+\+BADLOCATION} if the location is invalid 
+
+{\ttfamily FINGERPRINT\+\_\+\+FLASHERR} if the model couldn\textquotesingle{}t be written to flash memory 
+
+{\ttfamily FINGERPRINT\+\_\+\+PACKETRECIEVEERR} on communication error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a1f68560eee38714be3b57fa1d191d67a}\label{classAdafruit__Fingerprint_a1f68560eee38714be3b57fa1d191d67a}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!emptyDatabase@{emptyDatabase}}
+\index{emptyDatabase@{emptyDatabase}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{emptyDatabase()}{emptyDatabase()}}
+{\footnotesize\ttfamily uint8\+\_\+t Adafruit\+\_\+\+Fingerprint\+::empty\+Database (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ask the sensor to delete ALL models in memory. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily FINGERPRINT\+\_\+\+OK} on success 
+
+{\ttfamily FINGERPRINT\+\_\+\+BADLOCATION} if the location is invalid 
+
+{\ttfamily FINGERPRINT\+\_\+\+FLASHERR} if the model couldn\textquotesingle{}t be written to flash memory 
+
+{\ttfamily FINGERPRINT\+\_\+\+PACKETRECIEVEERR} on communication error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a8507ddc13aa2697779740e5fade9db1a}\label{classAdafruit__Fingerprint_a8507ddc13aa2697779740e5fade9db1a}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!fingerFastSearch@{fingerFastSearch}}
+\index{fingerFastSearch@{fingerFastSearch}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{fingerFastSearch()}{fingerFastSearch()}}
+{\footnotesize\ttfamily uint8\+\_\+t Adafruit\+\_\+\+Fingerprint\+::finger\+Fast\+Search (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ask the sensor to search the current slot 1 fingerprint features to match saved templates. The matching location is stored in {\bfseries{finger\+ID}} and the matching confidence in {\bfseries{confidence}} 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily FINGERPRINT\+\_\+\+OK} on fingerprint match success 
+
+{\ttfamily FINGERPRINT\+\_\+\+NOTFOUND} no match made 
+
+{\ttfamily FINGERPRINT\+\_\+\+PACKETRECIEVEERR} on communication error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a828ce078a1bbd3c8295792ac946eef56}\label{classAdafruit__Fingerprint_a828ce078a1bbd3c8295792ac946eef56}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!getImage@{getImage}}
+\index{getImage@{getImage}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{getImage()}{getImage()}}
+{\footnotesize\ttfamily uint8\+\_\+t Adafruit\+\_\+\+Fingerprint\+::get\+Image (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ask the sensor to take an image of the finger pressed on surface. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily FINGERPRINT\+\_\+\+OK} on success 
+
+{\ttfamily FINGERPRINT\+\_\+\+NOFINGER} if no finger detected 
+
+{\ttfamily FINGERPRINT\+\_\+\+PACKETRECIEVEERR} on communication error 
+
+{\ttfamily FINGERPRINT\+\_\+\+IMAGEFAIL} on imaging error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a51c5c11fd3252a8144f878b7f5a8a0d1}\label{classAdafruit__Fingerprint_a51c5c11fd3252a8144f878b7f5a8a0d1}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!getModel@{getModel}}
+\index{getModel@{getModel}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{getModel()}{getModel()}}
+{\footnotesize\ttfamily uint8\+\_\+t Adafruit\+\_\+\+Fingerprint\+::get\+Model (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ask the sensor to transfer 256-\/byte fingerprint template from the buffer to the UART. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily FINGERPRINT\+\_\+\+OK} on success 
+
+{\ttfamily FINGERPRINT\+\_\+\+PACKETRECIEVEERR} on communication error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a6ce9182a12492ce9f39807fad197985d}\label{classAdafruit__Fingerprint_a6ce9182a12492ce9f39807fad197985d}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!getStructuredPacket@{getStructuredPacket}}
+\index{getStructuredPacket@{getStructuredPacket}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{getStructuredPacket()}{getStructuredPacket()}}
+{\footnotesize\ttfamily uint8\+\_\+t Adafruit\+\_\+\+Fingerprint\+::get\+Structured\+Packet (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structAdafruit__Fingerprint__Packet}{Adafruit\+\_\+\+Fingerprint\+\_\+\+Packet}} $\ast$}]{packet,  }\item[{uint16\+\_\+t}]{timeout = {\ttfamily DEFAULTTIMEOUT} }\end{DoxyParamCaption})}
+
+
+
+Helper function to receive data over UART from the sensor and process it into a packet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & A structure containing the bytes received \\
+\hline
+{\em timeout} & how many milliseconds we\textquotesingle{}re willing to wait \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily FINGERPRINT\+\_\+\+OK} on success 
+
+{\ttfamily FINGERPRINT\+\_\+\+TIMEOUT} or {\ttfamily FINGERPRINT\+\_\+\+BADPACKET} on failure 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_abe95ce86618b6cd0f4c6fbcd1e4da8d0}\label{classAdafruit__Fingerprint_abe95ce86618b6cd0f4c6fbcd1e4da8d0}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!getTemplateCount@{getTemplateCount}}
+\index{getTemplateCount@{getTemplateCount}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{getTemplateCount()}{getTemplateCount()}}
+{\footnotesize\ttfamily uint8\+\_\+t Adafruit\+\_\+\+Fingerprint\+::get\+Template\+Count (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Ask the sensor for the number of templates stored in memory. The number is stored in {\bfseries{template\+Count}} on success. 
+
+\begin{DoxyReturn}{Returns}
+{\ttfamily FINGERPRINT\+\_\+\+OK} on success 
+
+{\ttfamily FINGERPRINT\+\_\+\+PACKETRECIEVEERR} on communication error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_adf222c3c7bba96f916729a8c9d213aa8}\label{classAdafruit__Fingerprint_adf222c3c7bba96f916729a8c9d213aa8}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!image2Tz@{image2Tz}}
+\index{image2Tz@{image2Tz}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{image2Tz()}{image2Tz()}}
+{\footnotesize\ttfamily uint8\+\_\+t Adafruit\+\_\+\+Fingerprint\+::image2\+Tz (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{slot = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Ask the sensor to convert image to feature template. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em slot} & Location to place feature template (put one in 1 and another in 2 for verification to create model) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily FINGERPRINT\+\_\+\+OK} on success 
+
+{\ttfamily FINGERPRINT\+\_\+\+IMAGEMESS} if image is too messy 
+
+{\ttfamily FINGERPRINT\+\_\+\+PACKETRECIEVEERR} on communication error 
+
+{\ttfamily FINGERPRINT\+\_\+\+FEATUREFAIL} on failure to identify fingerprint features 
+
+{\ttfamily FINGERPRINT\+\_\+\+INVALIDIMAGE} on failure to identify fingerprint features 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a4bac8a559ccbfecf91b3e716adab409a}\label{classAdafruit__Fingerprint_a4bac8a559ccbfecf91b3e716adab409a}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!loadModel@{loadModel}}
+\index{loadModel@{loadModel}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{loadModel()}{loadModel()}}
+{\footnotesize\ttfamily uint8\+\_\+t Adafruit\+\_\+\+Fingerprint\+::load\+Model (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{location }\end{DoxyParamCaption})}
+
+
+
+Ask the sensor to load a fingerprint model from flash into buffer 1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The model location \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily FINGERPRINT\+\_\+\+OK} on success 
+
+{\ttfamily FINGERPRINT\+\_\+\+BADLOCATION} if the location is invalid 
+
+{\ttfamily FINGERPRINT\+\_\+\+PACKETRECIEVEERR} on communication error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a14d8097e5ce038322913b43e026427e5}\label{classAdafruit__Fingerprint_a14d8097e5ce038322913b43e026427e5}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!storeModel@{storeModel}}
+\index{storeModel@{storeModel}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{storeModel()}{storeModel()}}
+{\footnotesize\ttfamily uint8\+\_\+t Adafruit\+\_\+\+Fingerprint\+::store\+Model (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{location }\end{DoxyParamCaption})}
+
+
+
+Ask the sensor to store the calculated model for later matching. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The model location \# \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily FINGERPRINT\+\_\+\+OK} on success 
+
+{\ttfamily FINGERPRINT\+\_\+\+BADLOCATION} if the location is invalid 
+
+{\ttfamily FINGERPRINT\+\_\+\+FLASHERR} if the model couldn\textquotesingle{}t be written to flash memory 
+
+{\ttfamily FINGERPRINT\+\_\+\+PACKETRECIEVEERR} on communication error 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_ae8d5776a5f109d93de9aa7830f2b1930}\label{classAdafruit__Fingerprint_ae8d5776a5f109d93de9aa7830f2b1930}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!verifyPassword@{verifyPassword}}
+\index{verifyPassword@{verifyPassword}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{verifyPassword()}{verifyPassword()}}
+{\footnotesize\ttfamily bool Adafruit\+\_\+\+Fingerprint\+::verify\+Password (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Verifies the sensors\textquotesingle{} access password (default password is 0x0000000). A good way to also check if the sensors is active and responding. 
+
+\begin{DoxyReturn}{Returns}
+True if password is correct 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_a4c9b787413658ad02a23f4afd0fad658}\label{classAdafruit__Fingerprint_a4c9b787413658ad02a23f4afd0fad658}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!writeStructuredPacket@{writeStructuredPacket}}
+\index{writeStructuredPacket@{writeStructuredPacket}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{writeStructuredPacket()}{writeStructuredPacket()}}
+{\footnotesize\ttfamily void Adafruit\+\_\+\+Fingerprint\+::write\+Structured\+Packet (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structAdafruit__Fingerprint__Packet}{Adafruit\+\_\+\+Fingerprint\+\_\+\+Packet}} \&}]{packet }\end{DoxyParamCaption})}
+
+
+
+Helper function to process a packet and send it over UART to the sensor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & A structure containing the bytes to transmit \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classAdafruit__Fingerprint_aa0a2aecc94edcce3d4717b51e22114e1}\label{classAdafruit__Fingerprint_aa0a2aecc94edcce3d4717b51e22114e1}} 
+\index{Adafruit\_Fingerprint@{Adafruit\_Fingerprint}!confidence@{confidence}}
+\index{confidence@{confidence}!Adafruit\_Fingerprint@{Adafruit\_Fingerprint}}
+\doxysubsubsection{\texorpdfstring{confidence}{confidence}}
+{\footnotesize\ttfamily uint16\+\_\+t Adafruit\+\_\+\+Fingerprint\+::confidence}
+
+The confidence of the \mbox{\hyperlink{classAdafruit__Fingerprint_a8507ddc13aa2697779740e5fade9db1a}{finger\+Fast\+Search()}} match, higher numbers are more confidents 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/Adafruit\+\_\+\+Fingerprint.\+h\item 
+src/\mbox{\hyperlink{Adafruit__Fingerprint_8cpp}{Adafruit\+\_\+\+Fingerprint.\+cpp}}\end{DoxyCompactItemize}

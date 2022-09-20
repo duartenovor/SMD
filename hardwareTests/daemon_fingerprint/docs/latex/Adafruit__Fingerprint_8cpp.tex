@@ -1,0 +1,52 @@
+\hypertarget{Adafruit__Fingerprint_8cpp}{}\doxysection{src/\+Adafruit\+\_\+\+Fingerprint.cpp File Reference}
+\label{Adafruit__Fingerprint_8cpp}\index{src/Adafruit\_Fingerprint.cpp@{src/Adafruit\_Fingerprint.cpp}}
+{\ttfamily \#include \char`\"{}Adafruit\+\_\+\+Fingerprint.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Adafruit__Fingerprint_8cpp_a991138836423734c50ffa2268c4d8510}{GET\+\_\+\+CMD\+\_\+\+PACKET}}(...)
+\begin{DoxyCompactList}\small\item\em Gets the command packet. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Adafruit__Fingerprint_8cpp_a8906d9aecdbb4d82f31b7696e58bcc40}{SEND\+\_\+\+CMD\+\_\+\+PACKET}}(...)
+\begin{DoxyCompactList}\small\item\em Sends the command packet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Adafruit__Fingerprint_8cpp_a991138836423734c50ffa2268c4d8510}\label{Adafruit__Fingerprint_8cpp_a991138836423734c50ffa2268c4d8510}} 
+\index{Adafruit\_Fingerprint.cpp@{Adafruit\_Fingerprint.cpp}!GET\_CMD\_PACKET@{GET\_CMD\_PACKET}}
+\index{GET\_CMD\_PACKET@{GET\_CMD\_PACKET}!Adafruit\_Fingerprint.cpp@{Adafruit\_Fingerprint.cpp}}
+\doxysubsubsection{\texorpdfstring{GET\_CMD\_PACKET}{GET\_CMD\_PACKET}}
+{\footnotesize\ttfamily \#define GET\+\_\+\+CMD\+\_\+\+PACKET(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  uint8\_t data[] = \{\_\_VA\_ARGS\_\_\};                                              \(\backslash\)}
+\DoxyCodeLine{  Adafruit\_Fingerprint\_Packet packet(FINGERPRINT\_COMMANDPACKET, \textcolor{keyword}{sizeof}(data),  \(\backslash\)}
+\DoxyCodeLine{                                     data);                                    \(\backslash\)}
+\DoxyCodeLine{  writeStructuredPacket(packet);                                               \(\backslash\)}
+\DoxyCodeLine{  if (getStructuredPacket(\&packet) != FINGERPRINT\_OK)                          \(\backslash\)}
+\DoxyCodeLine{    return FINGERPRINT\_PACKETRECIEVEERR;                                       \(\backslash\)}
+\DoxyCodeLine{  if (packet.type != FINGERPRINT\_ACKPACKET)                                    \(\backslash\)}
+\DoxyCodeLine{    return FINGERPRINT\_PACKETRECIEVEERR;}
+
+\end{DoxyCode}
+
+
+Gets the command packet. 
+
+\mbox{\Hypertarget{Adafruit__Fingerprint_8cpp_a8906d9aecdbb4d82f31b7696e58bcc40}\label{Adafruit__Fingerprint_8cpp_a8906d9aecdbb4d82f31b7696e58bcc40}} 
+\index{Adafruit\_Fingerprint.cpp@{Adafruit\_Fingerprint.cpp}!SEND\_CMD\_PACKET@{SEND\_CMD\_PACKET}}
+\index{SEND\_CMD\_PACKET@{SEND\_CMD\_PACKET}!Adafruit\_Fingerprint.cpp@{Adafruit\_Fingerprint.cpp}}
+\doxysubsubsection{\texorpdfstring{SEND\_CMD\_PACKET}{SEND\_CMD\_PACKET}}
+{\footnotesize\ttfamily \#define SEND\+\_\+\+CMD\+\_\+\+PACKET(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \mbox{\hyperlink{Adafruit__Fingerprint_8cpp_a991138836423734c50ffa2268c4d8510}{GET\_CMD\_PACKET}}(\_\_VA\_ARGS\_\_);                                                 \(\backslash\)}
+\DoxyCodeLine{  return packet.data[0];}
+
+\end{DoxyCode}
+
+
+Sends the command packet. 
+

@@ -1,0 +1,64 @@
+\hypertarget{structAdafruit__Fingerprint__Packet}{}\doxysection{Adafruit\+\_\+\+Fingerprint\+\_\+\+Packet Struct Reference}
+\label{structAdafruit__Fingerprint__Packet}\index{Adafruit\_Fingerprint\_Packet@{Adafruit\_Fingerprint\_Packet}}
+
+
+! Helper class to craft UART packets  
+
+
+
+
+{\ttfamily \#include $<$Adafruit\+\_\+\+Fingerprint.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a579e2e548a944cdc3a84f6cc5c62eee1}{Adafruit\+\_\+\+Fingerprint\+\_\+\+Packet}} (uint8\+\_\+t \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_aecdfd7a76ef41f265e3e684ef5398a38}{type}}, uint16\+\_\+t \mbox{\hyperlink{structAdafruit__Fingerprint__Packet_ab6cee6fbb3fdabf8ad3fc692cdb32e13}{length}}, uint8\+\_\+t $\ast$\mbox{\hyperlink{structAdafruit__Fingerprint__Packet_a46a35b2aaa8320ad4afe55696918ac12}{data}})
+\begin{DoxyCompactList}\small\item\em Create a new UART-\/borne packet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structAdafruit__Fingerprint__Packet_af580edb11a176e22cdcac6475a0a754e}\label{structAdafruit__Fingerprint__Packet_af580edb11a176e22cdcac6475a0a754e}} 
+uint16\+\_\+t {\bfseries start\+\_\+code}
+\begin{DoxyCompactList}\small\item\em \char`\"{}\+Wakeup\char`\"{} code for packet detection \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structAdafruit__Fingerprint__Packet_a9b2ba91c550108b443a9113cf387f060}\label{structAdafruit__Fingerprint__Packet_a9b2ba91c550108b443a9113cf387f060}} 
+uint8\+\_\+t {\bfseries address} \mbox{[}4\mbox{]}
+\begin{DoxyCompactList}\small\item\em 32-\/bit Fingerprint sensor address \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structAdafruit__Fingerprint__Packet_aecdfd7a76ef41f265e3e684ef5398a38}\label{structAdafruit__Fingerprint__Packet_aecdfd7a76ef41f265e3e684ef5398a38}} 
+uint8\+\_\+t {\bfseries type}
+\begin{DoxyCompactList}\small\item\em Type of packet. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structAdafruit__Fingerprint__Packet_ab6cee6fbb3fdabf8ad3fc692cdb32e13}\label{structAdafruit__Fingerprint__Packet_ab6cee6fbb3fdabf8ad3fc692cdb32e13}} 
+uint16\+\_\+t {\bfseries length}
+\begin{DoxyCompactList}\small\item\em Length of packet. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structAdafruit__Fingerprint__Packet_a46a35b2aaa8320ad4afe55696918ac12}\label{structAdafruit__Fingerprint__Packet_a46a35b2aaa8320ad4afe55696918ac12}} 
+uint8\+\_\+t {\bfseries data} \mbox{[}64\mbox{]}
+\begin{DoxyCompactList}\small\item\em The raw buffer for packet payload. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+! Helper class to craft UART packets 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structAdafruit__Fingerprint__Packet_a579e2e548a944cdc3a84f6cc5c62eee1}\label{structAdafruit__Fingerprint__Packet_a579e2e548a944cdc3a84f6cc5c62eee1}} 
+\index{Adafruit\_Fingerprint\_Packet@{Adafruit\_Fingerprint\_Packet}!Adafruit\_Fingerprint\_Packet@{Adafruit\_Fingerprint\_Packet}}
+\index{Adafruit\_Fingerprint\_Packet@{Adafruit\_Fingerprint\_Packet}!Adafruit\_Fingerprint\_Packet@{Adafruit\_Fingerprint\_Packet}}
+\doxysubsubsection{\texorpdfstring{Adafruit\_Fingerprint\_Packet()}{Adafruit\_Fingerprint\_Packet()}}
+{\footnotesize\ttfamily Adafruit\+\_\+\+Fingerprint\+\_\+\+Packet\+::\+Adafruit\+\_\+\+Fingerprint\+\_\+\+Packet (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{type,  }\item[{uint16\+\_\+t}]{length,  }\item[{uint8\+\_\+t $\ast$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a new UART-\/borne packet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Command, data, ack type packet \\
+\hline
+{\em length} & Size of payload \\
+\hline
+{\em data} & Pointer to bytes of size length we will memcopy into the internal buffer \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+includes/Adafruit\+\_\+\+Fingerprint.\+h\end{DoxyCompactItemize}

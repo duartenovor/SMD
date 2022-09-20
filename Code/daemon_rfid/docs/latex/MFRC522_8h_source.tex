@@ -1,0 +1,303 @@
+\hypertarget{MFRC522_8h_source}{}\doxysection{MFRC522.\+h}
+\label{MFRC522_8h_source}\index{includes/MFRC522.h@{includes/MFRC522.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#ifndef MFRC522\_h}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#define MFRC522\_h}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{20 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{typedef} uint8\_t byte;}
+\DoxyCodeLine{23 \textcolor{keyword}{typedef} uint16\_t word;}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{comment}{// Firmware data for self-\/test}}
+\DoxyCodeLine{26 \textcolor{comment}{// Reference values based on firmware version; taken from 16.1.1 in spec.}}
+\DoxyCodeLine{27 \textcolor{comment}{// Version 1.0}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{const} \textcolor{keywordtype}{byte} MFRC522\_firmware\_referenceV1\_0[]  = \{}
+\DoxyCodeLine{30     0x00, 0xC6, 0x37, 0xD5, 0x32, 0xB7, 0x57, 0x5C,}
+\DoxyCodeLine{31     0xC2, 0xD8, 0x7C, 0x4D, 0xD9, 0x70, 0xC7, 0x73,}
+\DoxyCodeLine{32     0x10, 0xE6, 0xD2, 0xAA, 0x5E, 0xA1, 0x3E, 0x5A,}
+\DoxyCodeLine{33     0x14, 0xAF, 0x30, 0x61, 0xC9, 0x70, 0xDB, 0x2E,}
+\DoxyCodeLine{34     0x64, 0x22, 0x72, 0xB5, 0xBD, 0x65, 0xF4, 0xEC,}
+\DoxyCodeLine{35     0x22, 0xBC, 0xD3, 0x72, 0x35, 0xCD, 0xAA, 0x41,}
+\DoxyCodeLine{36     0x1F, 0xA7, 0xF3, 0x53, 0x14, 0xDE, 0x7E, 0x02,}
+\DoxyCodeLine{37     0xD9, 0x0F, 0xB5, 0x5E, 0x25, 0x1D, 0x29, 0x79}
+\DoxyCodeLine{38 \};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{comment}{// Version 2.0}}
+\DoxyCodeLine{41 \textcolor{keyword}{const} \textcolor{keywordtype}{byte} MFRC522\_firmware\_referenceV2\_0[] = \{}
+\DoxyCodeLine{42     0x00, 0xEB, 0x66, 0xBA, 0x57, 0xBF, 0x23, 0x95,}
+\DoxyCodeLine{43     0xD0, 0xE3, 0x0D, 0x3D, 0x27, 0x89, 0x5C, 0xDE,}
+\DoxyCodeLine{44     0x9D, 0x3B, 0xA7, 0x00, 0x21, 0x5B, 0x89, 0x82,}
+\DoxyCodeLine{45     0x51, 0x3A, 0xEB, 0x02, 0x0C, 0xA5, 0x00, 0x49,}
+\DoxyCodeLine{46     0x7C, 0x84, 0x4D, 0xB3, 0xCC, 0xD2, 0x1B, 0x81,}
+\DoxyCodeLine{47     0x5D, 0x48, 0x76, 0xD5, 0x71, 0x61, 0x21, 0xA9,}
+\DoxyCodeLine{48     0x86, 0x96, 0x83, 0x38, 0xCF, 0x9D, 0x5B, 0x6D,}
+\DoxyCodeLine{49     0xDC, 0x15, 0xBA, 0x3E, 0x7D, 0x95, 0x3B, 0x2F}
+\DoxyCodeLine{50 \};}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{keyword}{class }\mbox{\hyperlink{classMFRC522}{MFRC522}} \{}
+\DoxyCodeLine{55 \textcolor{keyword}{public}:}
+\DoxyCodeLine{56     \textcolor{comment}{// MFRC522 registers. Described in chapter 9 of the datasheet.}}
+\DoxyCodeLine{57     \textcolor{comment}{// When using SPI all addresses are shifted one bit left in the "{}SPI address byte"{} (section 8.1.2.3)}}
+\DoxyCodeLine{58     \textcolor{keyword}{enum} PCD\_Register \{}
+\DoxyCodeLine{59         \textcolor{comment}{// Page 0: Command and status}}
+\DoxyCodeLine{60         \textcolor{comment}{//                        0x00          // reserved for future use}}
+\DoxyCodeLine{61         CommandReg              = 0x01 << 1,    \textcolor{comment}{// starts and stops command execution}}
+\DoxyCodeLine{62         ComIEnReg               = 0x02 << 1,    \textcolor{comment}{// enable and disable interrupt request control bits}}
+\DoxyCodeLine{63         DivIEnReg               = 0x03 << 1,    \textcolor{comment}{// enable and disable interrupt request control bits}}
+\DoxyCodeLine{64         ComIrqReg               = 0x04 << 1,    \textcolor{comment}{// interrupt request bits}}
+\DoxyCodeLine{65         DivIrqReg               = 0x05 << 1,    \textcolor{comment}{// interrupt request bits}}
+\DoxyCodeLine{66         ErrorReg                = 0x06 << 1,    \textcolor{comment}{// error bits showing the error status of the last command executed }}
+\DoxyCodeLine{67         Status1Reg              = 0x07 << 1,    \textcolor{comment}{// communication status bits}}
+\DoxyCodeLine{68         Status2Reg              = 0x08 << 1,    \textcolor{comment}{// receiver and transmitter status bits}}
+\DoxyCodeLine{69         FIFODataReg             = 0x09 << 1,    \textcolor{comment}{// input and output of 64 byte FIFO buffer}}
+\DoxyCodeLine{70         FIFOLevelReg            = 0x0A << 1,    \textcolor{comment}{// number of bytes stored in the FIFO buffer}}
+\DoxyCodeLine{71         WaterLevelReg           = 0x0B << 1,    \textcolor{comment}{// level for FIFO underflow and overflow warning}}
+\DoxyCodeLine{72         ControlReg              = 0x0C << 1,    \textcolor{comment}{// miscellaneous control registers}}
+\DoxyCodeLine{73         BitFramingReg           = 0x0D << 1,    \textcolor{comment}{// adjustments for bit-\/oriented frames}}
+\DoxyCodeLine{74         CollReg                 = 0x0E << 1,    \textcolor{comment}{// bit position of the first bit-\/collision detected on the RF interface}}
+\DoxyCodeLine{75         \textcolor{comment}{//                        0x0F          // reserved for future use}}
+\DoxyCodeLine{76         }
+\DoxyCodeLine{77         \textcolor{comment}{// Page 1: Command}}
+\DoxyCodeLine{78         \textcolor{comment}{//                        0x10          // reserved for future use}}
+\DoxyCodeLine{79         ModeReg                 = 0x11 << 1,    \textcolor{comment}{// defines general modes for transmitting and receiving }}
+\DoxyCodeLine{80         TxModeReg               = 0x12 << 1,    \textcolor{comment}{// defines transmission data rate and framing}}
+\DoxyCodeLine{81         RxModeReg               = 0x13 << 1,    \textcolor{comment}{// defines reception data rate and framing}}
+\DoxyCodeLine{82         TxControlReg            = 0x14 << 1,    \textcolor{comment}{// controls the logical behavior of the antenna driver pins TX1 and TX2}}
+\DoxyCodeLine{83         TxASKReg                = 0x15 << 1,    \textcolor{comment}{// controls the setting of the transmission modulation}}
+\DoxyCodeLine{84         TxSelReg                = 0x16 << 1,    \textcolor{comment}{// selects the internal sources for the antenna driver}}
+\DoxyCodeLine{85         RxSelReg                = 0x17 << 1,    \textcolor{comment}{// selects internal receiver settings}}
+\DoxyCodeLine{86         RxThresholdReg          = 0x18 << 1,    \textcolor{comment}{// selects thresholds for the bit decoder}}
+\DoxyCodeLine{87         DemodReg                = 0x19 << 1,    \textcolor{comment}{// defines demodulator settings}}
+\DoxyCodeLine{88         \textcolor{comment}{//                        0x1A          // reserved for future use}}
+\DoxyCodeLine{89         \textcolor{comment}{//                        0x1B          // reserved for future use}}
+\DoxyCodeLine{90         MfTxReg                 = 0x1C << 1,    \textcolor{comment}{// controls some MIFARE communication transmit parameters}}
+\DoxyCodeLine{91         MfRxReg                 = 0x1D << 1,    \textcolor{comment}{// controls some MIFARE communication receive parameters}}
+\DoxyCodeLine{92         \textcolor{comment}{//                        0x1E          // reserved for future use}}
+\DoxyCodeLine{93         SerialSpeedReg          = 0x1F << 1,    \textcolor{comment}{// selects the speed of the serial UART interface}}
+\DoxyCodeLine{94         }
+\DoxyCodeLine{95         \textcolor{comment}{// Page 2: Configuration}}
+\DoxyCodeLine{96         \textcolor{comment}{//                        0x20          // reserved for future use}}
+\DoxyCodeLine{97         CRCResultRegH           = 0x21 << 1,    \textcolor{comment}{// shows the MSB and LSB values of the CRC calculation}}
+\DoxyCodeLine{98         CRCResultRegL           = 0x22 << 1,}
+\DoxyCodeLine{99         \textcolor{comment}{//                        0x23          // reserved for future use}}
+\DoxyCodeLine{100         ModWidthReg             = 0x24 << 1,    \textcolor{comment}{// controls the ModWidth setting?}}
+\DoxyCodeLine{101         \textcolor{comment}{//                        0x25          // reserved for future use}}
+\DoxyCodeLine{102         RFCfgReg                = 0x26 << 1,    \textcolor{comment}{// configures the receiver gain}}
+\DoxyCodeLine{103         GsNReg                  = 0x27 << 1,    \textcolor{comment}{// selects the conductance of the antenna driver pins TX1 and TX2 for modulation }}
+\DoxyCodeLine{104         CWGsPReg                = 0x28 << 1,    \textcolor{comment}{// defines the conductance of the p-\/driver output during periods of no modulation}}
+\DoxyCodeLine{105         ModGsPReg               = 0x29 << 1,    \textcolor{comment}{// defines the conductance of the p-\/driver output during periods of modulation}}
+\DoxyCodeLine{106         TModeReg                = 0x2A << 1,    \textcolor{comment}{// defines settings for the internal timer}}
+\DoxyCodeLine{107         TPrescalerReg           = 0x2B << 1,    \textcolor{comment}{// the lower 8 bits of the TPrescaler value. The 4 high bits are in TModeReg.}}
+\DoxyCodeLine{108         TReloadRegH             = 0x2C << 1,    \textcolor{comment}{// defines the 16-\/bit timer reload value}}
+\DoxyCodeLine{109         TReloadRegL             = 0x2D << 1,}
+\DoxyCodeLine{110         TCounterValueRegH       = 0x2E << 1,    \textcolor{comment}{// shows the 16-\/bit timer value}}
+\DoxyCodeLine{111         TCounterValueRegL       = 0x2F << 1,}
+\DoxyCodeLine{112         }
+\DoxyCodeLine{113         \textcolor{comment}{// Page 3: Test Registers}}
+\DoxyCodeLine{114         \textcolor{comment}{//                        0x30          // reserved for future use}}
+\DoxyCodeLine{115         TestSel1Reg             = 0x31 << 1,    \textcolor{comment}{// general test signal configuration}}
+\DoxyCodeLine{116         TestSel2Reg             = 0x32 << 1,    \textcolor{comment}{// general test signal configuration}}
+\DoxyCodeLine{117         TestPinEnReg            = 0x33 << 1,    \textcolor{comment}{// enables pin output driver on pins D1 to D7}}
+\DoxyCodeLine{118         TestPinValueReg         = 0x34 << 1,    \textcolor{comment}{// defines the values for D1 to D7 when it is used as an I/O bus}}
+\DoxyCodeLine{119         TestBusReg              = 0x35 << 1,    \textcolor{comment}{// shows the status of the internal test bus}}
+\DoxyCodeLine{120         AutoTestReg             = 0x36 << 1,    \textcolor{comment}{// controls the digital self test}}
+\DoxyCodeLine{121         VersionReg              = 0x37 << 1,    \textcolor{comment}{// shows the software version}}
+\DoxyCodeLine{122         AnalogTestReg           = 0x38 << 1,    \textcolor{comment}{// controls the pins AUX1 and AUX2}}
+\DoxyCodeLine{123         TestDAC1Reg             = 0x39 << 1,    \textcolor{comment}{// defines the test value for TestDAC1}}
+\DoxyCodeLine{124         TestDAC2Reg             = 0x3A << 1,    \textcolor{comment}{// defines the test value for TestDAC2}}
+\DoxyCodeLine{125         TestADCReg              = 0x3B << 1     \textcolor{comment}{// shows the value of ADC I and Q channels}}
+\DoxyCodeLine{126         \textcolor{comment}{//                        0x3C          // reserved for production tests}}
+\DoxyCodeLine{127         \textcolor{comment}{//                        0x3D          // reserved for production tests}}
+\DoxyCodeLine{128         \textcolor{comment}{//                        0x3E          // reserved for production tests}}
+\DoxyCodeLine{129         \textcolor{comment}{//                        0x3F          // reserved for production tests}}
+\DoxyCodeLine{130     \};}
+\DoxyCodeLine{131     }
+\DoxyCodeLine{132     \textcolor{comment}{// MFRC522 commands. Described in chapter 10 of the datasheet.}}
+\DoxyCodeLine{133     \textcolor{keyword}{enum} PCD\_Command \{}
+\DoxyCodeLine{134         PCD\_Idle                = 0x00,     \textcolor{comment}{// no action, cancels current command execution}}
+\DoxyCodeLine{135         PCD\_Mem                 = 0x01,     \textcolor{comment}{// stores 25 bytes into the internal buffer}}
+\DoxyCodeLine{136         PCD\_GenerateRandomID    = 0x02,     \textcolor{comment}{// generates a 10-\/byte random ID number}}
+\DoxyCodeLine{137         PCD\_CalcCRC             = 0x03,     \textcolor{comment}{// activates the CRC coprocessor or performs a self test}}
+\DoxyCodeLine{138         PCD\_Transmit            = 0x04,     \textcolor{comment}{// transmits data from the FIFO buffer}}
+\DoxyCodeLine{139         PCD\_NoCmdChange         = 0x07,     \textcolor{comment}{// no command change, can be used to modify the CommandReg register bits without affecting the command, for example, the PowerDown bit}}
+\DoxyCodeLine{140         PCD\_Receive             = 0x08,     \textcolor{comment}{// activates the receiver circuits}}
+\DoxyCodeLine{141         PCD\_Transceive          = 0x0C,     \textcolor{comment}{// transmits data from FIFO buffer to antenna and automatically activates the receiver after transmission}}
+\DoxyCodeLine{142         PCD\_MFAuthent           = 0x0E,     \textcolor{comment}{// performs the MIFARE standard authentication as a reader}}
+\DoxyCodeLine{143         PCD\_SoftReset           = 0x0F      \textcolor{comment}{// resets the MFRC522}}
+\DoxyCodeLine{144     \};}
+\DoxyCodeLine{145     }
+\DoxyCodeLine{146     \textcolor{comment}{// MFRC522 RxGain[2:0] masks, defines the receiver's signal voltage gain factor (on the PCD).}}
+\DoxyCodeLine{147     \textcolor{comment}{// Described in 9.3.3.6 / table 98 of the datasheet at http://www.nxp.com/documents/data\_sheet/MFRC522.pdf}}
+\DoxyCodeLine{148     \textcolor{keyword}{enum} PCD\_RxGain \{}
+\DoxyCodeLine{149         RxGain\_18dB             = 0x00 << 4,    \textcolor{comment}{// 000b -\/ 18 dB, minimum}}
+\DoxyCodeLine{150         RxGain\_23dB             = 0x01 << 4,    \textcolor{comment}{// 001b -\/ 23 dB}}
+\DoxyCodeLine{151         RxGain\_18dB\_2           = 0x02 << 4,    \textcolor{comment}{// 010b -\/ 18 dB, it seems 010b is a duplicate for 000b}}
+\DoxyCodeLine{152         RxGain\_23dB\_2           = 0x03 << 4,    \textcolor{comment}{// 011b -\/ 23 dB, it seems 011b is a duplicate for 001b}}
+\DoxyCodeLine{153         RxGain\_33dB             = 0x04 << 4,    \textcolor{comment}{// 100b -\/ 33 dB, average, and typical default}}
+\DoxyCodeLine{154         RxGain\_38dB             = 0x05 << 4,    \textcolor{comment}{// 101b -\/ 38 dB}}
+\DoxyCodeLine{155         RxGain\_43dB             = 0x06 << 4,    \textcolor{comment}{// 110b -\/ 43 dB}}
+\DoxyCodeLine{156         RxGain\_48dB             = 0x07 << 4,    \textcolor{comment}{// 111b -\/ 48 dB, maximum}}
+\DoxyCodeLine{157         RxGain\_min              = 0x00 << 4,    \textcolor{comment}{// 000b -\/ 18 dB, minimum, convenience for RxGain\_18dB}}
+\DoxyCodeLine{158         RxGain\_avg              = 0x04 << 4,    \textcolor{comment}{// 100b -\/ 33 dB, average, convenience for RxGain\_33dB}}
+\DoxyCodeLine{159         RxGain\_max              = 0x07 << 4     \textcolor{comment}{// 111b -\/ 48 dB, maximum, convenience for RxGain\_48dB}}
+\DoxyCodeLine{160     \};}
+\DoxyCodeLine{161     }
+\DoxyCodeLine{162     \textcolor{comment}{// Commands sent to the PICC.}}
+\DoxyCodeLine{163     \textcolor{keyword}{enum} PICC\_Command \{}
+\DoxyCodeLine{164         \textcolor{comment}{// The commands used by the PCD to manage communication with several PICCs (ISO 14443-\/3, Type A, section 6.4)}}
+\DoxyCodeLine{165         PICC\_CMD\_REQA           = 0x26,     \textcolor{comment}{// REQuest command, Type A. Invites PICCs in state IDLE to go to READY and prepare for anticollision or selection. 7 bit frame.}}
+\DoxyCodeLine{166         PICC\_CMD\_WUPA           = 0x52,     \textcolor{comment}{// Wake-\/UP command, Type A. Invites PICCs in state IDLE and HALT to go to READY(*) and prepare for anticollision or selection. 7 bit frame.}}
+\DoxyCodeLine{167         PICC\_CMD\_CT             = 0x88,     \textcolor{comment}{// Cascade Tag. Not really a command, but used during anti collision.}}
+\DoxyCodeLine{168         PICC\_CMD\_SEL\_CL1        = 0x93,     \textcolor{comment}{// Anti collision/Select, Cascade Level 1}}
+\DoxyCodeLine{169         PICC\_CMD\_SEL\_CL2        = 0x95,     \textcolor{comment}{// Anti collision/Select, Cascade Level 2}}
+\DoxyCodeLine{170         PICC\_CMD\_SEL\_CL3        = 0x97,     \textcolor{comment}{// Anti collision/Select, Cascade Level 3}}
+\DoxyCodeLine{171         PICC\_CMD\_HLTA           = 0x50,     \textcolor{comment}{// HaLT command, Type A. Instructs an ACTIVE PICC to go to state HALT.}}
+\DoxyCodeLine{172         \textcolor{comment}{// The commands used for MIFARE Classic (from http://www.nxp.com/documents/data\_sheet/MF1S503x.pdf, Section 9)}}
+\DoxyCodeLine{173         \textcolor{comment}{// Use PCD\_MFAuthent to authenticate access to a sector, then use these commands to read/write/modify the blocks on the sector.}}
+\DoxyCodeLine{174         \textcolor{comment}{// The read/write commands can also be used for MIFARE Ultralight.}}
+\DoxyCodeLine{175         PICC\_CMD\_MF\_AUTH\_KEY\_A  = 0x60,     \textcolor{comment}{// Perform authentication with Key A}}
+\DoxyCodeLine{176         PICC\_CMD\_MF\_AUTH\_KEY\_B  = 0x61,     \textcolor{comment}{// Perform authentication with Key B}}
+\DoxyCodeLine{177         PICC\_CMD\_MF\_READ        = 0x30,     \textcolor{comment}{// Reads one 16 byte block from the authenticated sector of the PICC. Also used for MIFARE Ultralight.}}
+\DoxyCodeLine{178         PICC\_CMD\_MF\_WRITE       = 0xA0,     \textcolor{comment}{// Writes one 16 byte block to the authenticated sector of the PICC. Called "{}COMPATIBILITY WRITE"{} for MIFARE Ultralight.}}
+\DoxyCodeLine{179         PICC\_CMD\_MF\_DECREMENT   = 0xC0,     \textcolor{comment}{// Decrements the contents of a block and stores the result in the internal data register.}}
+\DoxyCodeLine{180         PICC\_CMD\_MF\_INCREMENT   = 0xC1,     \textcolor{comment}{// Increments the contents of a block and stores the result in the internal data register.}}
+\DoxyCodeLine{181         PICC\_CMD\_MF\_RESTORE     = 0xC2,     \textcolor{comment}{// Reads the contents of a block into the internal data register.}}
+\DoxyCodeLine{182         PICC\_CMD\_MF\_TRANSFER    = 0xB0,     \textcolor{comment}{// Writes the contents of the internal data register to a block.}}
+\DoxyCodeLine{183         \textcolor{comment}{// The commands used for MIFARE Ultralight (from http://www.nxp.com/documents/data\_sheet/MF0ICU1.pdf, Section 8.6)}}
+\DoxyCodeLine{184         \textcolor{comment}{// The PICC\_CMD\_MF\_READ and PICC\_CMD\_MF\_WRITE can also be used for MIFARE Ultralight.}}
+\DoxyCodeLine{185         PICC\_CMD\_UL\_WRITE       = 0xA2      \textcolor{comment}{// Writes one 4 byte page to the PICC.}}
+\DoxyCodeLine{186     \};}
+\DoxyCodeLine{187     }
+\DoxyCodeLine{188     \textcolor{comment}{// MIFARE constants that does not fit anywhere else}}
+\DoxyCodeLine{189     \textcolor{keyword}{enum} MIFARE\_Misc \{}
+\DoxyCodeLine{190         MF\_ACK                  = 0xA,      \textcolor{comment}{// The MIFARE Classic uses a 4 bit ACK/NAK. Any other value than 0xA is NAK.}}
+\DoxyCodeLine{191         MF\_KEY\_SIZE             = 6         \textcolor{comment}{// A Mifare Crypto1 key is 6 bytes.}}
+\DoxyCodeLine{192     \};}
+\DoxyCodeLine{193     }
+\DoxyCodeLine{194     \textcolor{comment}{// PICC types we can detect. Remember to update PICC\_GetTypeName() if you add more.}}
+\DoxyCodeLine{195     \textcolor{keyword}{enum} PICC\_Type \{}
+\DoxyCodeLine{196         PICC\_TYPE\_UNKNOWN       = 0,}
+\DoxyCodeLine{197         PICC\_TYPE\_ISO\_14443\_4   = 1,    \textcolor{comment}{// PICC compliant with ISO/IEC 14443-\/4 }}
+\DoxyCodeLine{198         PICC\_TYPE\_ISO\_18092     = 2,    \textcolor{comment}{// PICC compliant with ISO/IEC 18092 (NFC)}}
+\DoxyCodeLine{199         PICC\_TYPE\_MIFARE\_MINI   = 3,    \textcolor{comment}{// MIFARE Classic protocol, 320 bytes}}
+\DoxyCodeLine{200         PICC\_TYPE\_MIFARE\_1K     = 4,    \textcolor{comment}{// MIFARE Classic protocol, 1KB}}
+\DoxyCodeLine{201         PICC\_TYPE\_MIFARE\_4K     = 5,    \textcolor{comment}{// MIFARE Classic protocol, 4KB}}
+\DoxyCodeLine{202         PICC\_TYPE\_MIFARE\_UL     = 6,    \textcolor{comment}{// MIFARE Ultralight or Ultralight C}}
+\DoxyCodeLine{203         PICC\_TYPE\_MIFARE\_PLUS   = 7,    \textcolor{comment}{// MIFARE Plus}}
+\DoxyCodeLine{204         PICC\_TYPE\_TNP3XXX       = 8,    \textcolor{comment}{// Only mentioned in NXP AN 10833 MIFARE Type Identification Procedure}}
+\DoxyCodeLine{205         PICC\_TYPE\_NOT\_COMPLETE  = 255   \textcolor{comment}{// SAK indicates UID is not complete.}}
+\DoxyCodeLine{206     \};}
+\DoxyCodeLine{207     }
+\DoxyCodeLine{208     \textcolor{comment}{// Return codes from the functions in this class. Remember to update GetStatusCodeName() if you add more.}}
+\DoxyCodeLine{209     \textcolor{keyword}{enum} StatusCode \{}
+\DoxyCodeLine{210         STATUS\_OK               = 1,    \textcolor{comment}{// Success}}
+\DoxyCodeLine{211         STATUS\_ERROR            = 2,    \textcolor{comment}{// Error in communication}}
+\DoxyCodeLine{212         STATUS\_COLLISION        = 3,    \textcolor{comment}{// Collission detected}}
+\DoxyCodeLine{213         STATUS\_TIMEOUT          = 4,    \textcolor{comment}{// Timeout in communication.}}
+\DoxyCodeLine{214         STATUS\_NO\_ROOM          = 5,    \textcolor{comment}{// A buffer is not big enough.}}
+\DoxyCodeLine{215         STATUS\_INTERNAL\_ERROR   = 6,    \textcolor{comment}{// Internal error in the code. Should not happen ;-\/)}}
+\DoxyCodeLine{216         STATUS\_INVALID          = 7,    \textcolor{comment}{// Invalid argument.}}
+\DoxyCodeLine{217         STATUS\_CRC\_WRONG        = 8,    \textcolor{comment}{// The CRC\_A does not match}}
+\DoxyCodeLine{218         STATUS\_MIFARE\_NACK      = 9     \textcolor{comment}{// A MIFARE PICC responded with NAK.}}
+\DoxyCodeLine{219     \};}
+\DoxyCodeLine{220     }
+\DoxyCodeLine{221     \textcolor{comment}{// A struct used for passing the UID of a PICC.}}
+\DoxyCodeLine{222     \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{223         \textcolor{keywordtype}{byte}        size;           \textcolor{comment}{// Number of bytes in the UID. 4, 7 or 10.}}
+\DoxyCodeLine{224         \textcolor{keywordtype}{byte}        uidByte[10];}
+\DoxyCodeLine{225         \textcolor{keywordtype}{byte}        sak;            \textcolor{comment}{// The SAK (Select acknowledge) byte returned from the PICC after successful selection.}}
+\DoxyCodeLine{226     \} \mbox{\hyperlink{structMFRC522_1_1Uid}{Uid}};}
+\DoxyCodeLine{227     }
+\DoxyCodeLine{228     \textcolor{comment}{// A struct used for passing a MIFARE Crypto1 key}}
+\DoxyCodeLine{229     \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{230         \textcolor{keywordtype}{byte}        keyByte[MF\_KEY\_SIZE];}
+\DoxyCodeLine{231     \} \mbox{\hyperlink{structMFRC522_1_1MIFARE__Key}{MIFARE\_Key}};}
+\DoxyCodeLine{232     }
+\DoxyCodeLine{233     \textcolor{comment}{// Member variables}}
+\DoxyCodeLine{234     \mbox{\hyperlink{structMFRC522_1_1Uid}{Uid}} uid;                             \textcolor{comment}{// Used by PICC\_ReadCardSerial().}}
+\DoxyCodeLine{235     }
+\DoxyCodeLine{236     \textcolor{comment}{// Size of the MFRC522 FIFO}}
+\DoxyCodeLine{237     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{byte} FIFO\_SIZE = 64;       \textcolor{comment}{// The FIFO is 64 bytes.}}
+\DoxyCodeLine{238     }
+\DoxyCodeLine{240     \textcolor{comment}{// Functions for setting up the Raspberry Pi}}
+\DoxyCodeLine{242 \textcolor{comment}{}    \mbox{\hyperlink{classMFRC522_a999d0301e800f479e1ecfa2fd06e28c8}{MFRC522}}();}
+\DoxyCodeLine{243     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_a425d73a02db79e17abd78ff805770fc3}{setSPIConfig}}();}
+\DoxyCodeLine{245     \textcolor{comment}{// Basic interface functions for communicating with the MFRC522}}
+\DoxyCodeLine{247 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_aa97f1faf2a4c82b911d7c3ed2535bb59}{PCD\_WriteRegister}}(\textcolor{keywordtype}{byte} reg, \textcolor{keywordtype}{byte} value);}
+\DoxyCodeLine{248     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_aa97f1faf2a4c82b911d7c3ed2535bb59}{PCD\_WriteRegister}}(\textcolor{keywordtype}{byte} reg, \textcolor{keywordtype}{byte} count, \textcolor{keywordtype}{byte} *values);}
+\DoxyCodeLine{249     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a4d81572f8b9ed0ffb1f59270cdffc310}{PCD\_ReadRegister}}(\textcolor{keywordtype}{byte} reg);}
+\DoxyCodeLine{250     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_a4d81572f8b9ed0ffb1f59270cdffc310}{PCD\_ReadRegister}}(\textcolor{keywordtype}{byte} reg, \textcolor{keywordtype}{byte} count, \textcolor{keywordtype}{byte} *values, \textcolor{keywordtype}{byte} rxAlign = 0);}
+\DoxyCodeLine{251     \textcolor{keywordtype}{void} setBitMask(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} reg, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} mask);}
+\DoxyCodeLine{252     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_adef7552eb0089496522153e7bad19d63}{PCD\_SetRegisterBitMask}}(\textcolor{keywordtype}{byte} reg, \textcolor{keywordtype}{byte} mask);}
+\DoxyCodeLine{253     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_a45d4f1b7cdc9eccd9d394d4f5058c503}{PCD\_ClearRegisterBitMask}}(\textcolor{keywordtype}{byte} reg, \textcolor{keywordtype}{byte} mask);}
+\DoxyCodeLine{254     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a96adb3a83724709c622cc50d5518cbc3}{PCD\_CalculateCRC}}(\textcolor{keywordtype}{byte} *data, \textcolor{keywordtype}{byte} length, \textcolor{keywordtype}{byte} *result);}
+\DoxyCodeLine{255     }
+\DoxyCodeLine{257     \textcolor{comment}{// Functions for manipulating the MFRC522}}
+\DoxyCodeLine{259 \textcolor{comment}{}    \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_ad681e424fc68a57941bea5702cee05eb}{PCD\_Init}}();}
+\DoxyCodeLine{260     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_a9886678ea0a65021bf602cfb110caa15}{PCD\_Reset}}();}
+\DoxyCodeLine{261     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_a044be037a5f172e9cea7d8ce1dcf32e0}{PCD\_AntennaOn}}();}
+\DoxyCodeLine{262     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_a2098ebe85700109b20c5026643f1dad7}{PCD\_AntennaOff}}();}
+\DoxyCodeLine{263     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_aa02ae994a9ebf146475f46fc538cef28}{PCD\_GetAntennaGain}}();}
+\DoxyCodeLine{264     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_a5ce84dd855f2ae297dd00fafaf62ef78}{PCD\_SetAntennaGain}}(\textcolor{keywordtype}{byte} mask);}
+\DoxyCodeLine{265     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classMFRC522_a25f052c9c340da34128c365662370b01}{PCD\_PerformSelfTest}}();}
+\DoxyCodeLine{266     }
+\DoxyCodeLine{268     \textcolor{comment}{// Functions for communicating with PICCs}}
+\DoxyCodeLine{270 \textcolor{comment}{}    \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a4d967509ca687fca2dbfd0d867b38d8d}{PCD\_TransceiveData}}(\textcolor{keywordtype}{byte} *sendData, \textcolor{keywordtype}{byte} sendLen, \textcolor{keywordtype}{byte} *backData, \textcolor{keywordtype}{byte} *backLen, \textcolor{keywordtype}{byte} *validBits = NULL, \textcolor{keywordtype}{byte} rxAlign = 0, \textcolor{keywordtype}{bool} checkCRC = \textcolor{keyword}{false});}
+\DoxyCodeLine{271     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a731cc27ae35b1bba2d2c9d2af28b5c23}{PCD\_CommunicateWithPICC}}(\textcolor{keywordtype}{byte} command, \textcolor{keywordtype}{byte} waitIRq, \textcolor{keywordtype}{byte} *sendData, \textcolor{keywordtype}{byte} sendLen, \textcolor{keywordtype}{byte} *backData = NULL, \textcolor{keywordtype}{byte} *backLen = NULL, \textcolor{keywordtype}{byte} *validBits = NULL, \textcolor{keywordtype}{byte} rxAlign = 0, \textcolor{keywordtype}{bool} checkCRC = \textcolor{keyword}{false});}
+\DoxyCodeLine{272     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a6db371f6ca95e8ea22445124c79012cc}{PICC\_RequestA}}(\textcolor{keywordtype}{byte} *bufferATQA, \textcolor{keywordtype}{byte} *bufferSize);}
+\DoxyCodeLine{273     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a009dfa9138c6f999af82d7fc5b17a272}{PICC\_WakeupA}}(\textcolor{keywordtype}{byte} *bufferATQA, \textcolor{keywordtype}{byte} *bufferSize);}
+\DoxyCodeLine{274     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a43d475b7d21f31bd1104e81ea5e3d1c9}{PICC\_REQA\_or\_WUPA}}(\textcolor{keywordtype}{byte} command, \textcolor{keywordtype}{byte} *bufferATQA, \textcolor{keywordtype}{byte} *bufferSize);}
+\DoxyCodeLine{275     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_ab40449ac80501db28d25889612bb2db0}{PICC\_Select}}(\mbox{\hyperlink{structMFRC522_1_1Uid}{Uid}} *uid, \textcolor{keywordtype}{byte} validBits = 0);}
+\DoxyCodeLine{276     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_aaa152b63193d852bf2edcfae3044bea4}{PICC\_HaltA}}();}
+\DoxyCodeLine{277     }
+\DoxyCodeLine{279     \textcolor{comment}{// Functions for communicating with MIFARE PICCs}}
+\DoxyCodeLine{281 \textcolor{comment}{}    \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a26469f6295cd9796e0bb781c48036971}{PCD\_Authenticate}}(\textcolor{keywordtype}{byte} command, \textcolor{keywordtype}{byte} blockAddr, \mbox{\hyperlink{structMFRC522_1_1MIFARE__Key}{MIFARE\_Key}} *key, \mbox{\hyperlink{structMFRC522_1_1Uid}{Uid}} *uid);}
+\DoxyCodeLine{282     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_a24d3ab7b2170fdfa3f0121a7256f12d9}{PCD\_StopCrypto1}}();}
+\DoxyCodeLine{283     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a05cdd51aa162e37de1a9439b75901e28}{MIFARE\_Read}}(\textcolor{keywordtype}{byte} blockAddr, \textcolor{keywordtype}{byte} *buffer, \textcolor{keywordtype}{byte} *bufferSize);}
+\DoxyCodeLine{284     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a6f3c1ba843a2484314c72daf2e7734f0}{MIFARE\_Write}}(\textcolor{keywordtype}{byte} blockAddr, \textcolor{keywordtype}{byte} *buffer, \textcolor{keywordtype}{byte} bufferSize);}
+\DoxyCodeLine{285     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a1b4732c54686bd32e2dd79cf4b5279e6}{MIFARE\_Decrement}}(\textcolor{keywordtype}{byte} blockAddr, \textcolor{keywordtype}{long} delta);}
+\DoxyCodeLine{286     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_aa45713c6d2c8dcf949874abd03f72327}{MIFARE\_Increment}}(\textcolor{keywordtype}{byte} blockAddr, \textcolor{keywordtype}{long} delta);}
+\DoxyCodeLine{287     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_aa0f6201f92ae7babab4d37786a12d483}{MIFARE\_Restore}}(\textcolor{keywordtype}{byte} blockAddr);}
+\DoxyCodeLine{288     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a36299391c708a71c11c48a94c4e3f3c2}{MIFARE\_Transfer}}(\textcolor{keywordtype}{byte} blockAddr);}
+\DoxyCodeLine{289     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_aba2c50d4660897d136cf839940299e07}{MIFARE\_Ultralight\_Write}}(\textcolor{keywordtype}{byte} page, \textcolor{keywordtype}{byte} *buffer, \textcolor{keywordtype}{byte} bufferSize);}
+\DoxyCodeLine{290     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a1116cb31c5a64c2be71e3b8649d7865b}{MIFARE\_GetValue}}(\textcolor{keywordtype}{byte} blockAddr, \textcolor{keywordtype}{long} *value);}
+\DoxyCodeLine{291     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a9ae3cc71bcfb52455349683d3685a919}{MIFARE\_SetValue}}(\textcolor{keywordtype}{byte} blockAddr, \textcolor{keywordtype}{long} value);}
+\DoxyCodeLine{292     }
+\DoxyCodeLine{294     \textcolor{comment}{// Support functions}}
+\DoxyCodeLine{296 \textcolor{comment}{}    \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a638bcf89cd6356cfbc755004a2e62b1c}{PCD\_MIFARE\_Transceive}}(\textcolor{keywordtype}{byte} *sendData, \textcolor{keywordtype}{byte} sendLen, \textcolor{keywordtype}{bool} acceptTimeout = \textcolor{keyword}{false});}
+\DoxyCodeLine{297     \textcolor{comment}{// old function used too much memory, now name moved to flash; if you need char, copy from flash to memory}}
+\DoxyCodeLine{298     \textcolor{comment}{//const char *GetStatusCodeName(byte code);}}
+\DoxyCodeLine{299     \textcolor{keyword}{const} \textcolor{keywordtype}{string} \mbox{\hyperlink{classMFRC522_ae3a839ad2ee9e6e023214ffe54227960}{GetStatusCodeName}}(\textcolor{keywordtype}{byte} code);}
+\DoxyCodeLine{300     \textcolor{keywordtype}{byte} \mbox{\hyperlink{classMFRC522_a1217f49a195799e3c55b388f9d378ab3}{PICC\_GetType}}(\textcolor{keywordtype}{byte} sak);}
+\DoxyCodeLine{301     \textcolor{comment}{// old function used too much memory, now name moved to flash; if you need char, copy from flash to memory}}
+\DoxyCodeLine{302     \textcolor{comment}{//const char *PICC\_GetTypeName(byte type);}}
+\DoxyCodeLine{303     \textcolor{keyword}{const} \textcolor{keywordtype}{string} \mbox{\hyperlink{classMFRC522_a3be421e445b673cf4b2c803bd2a027a7}{PICC\_GetTypeName}}(\textcolor{keywordtype}{byte} type);}
+\DoxyCodeLine{304     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_a6f324d43c6fbbd0e260b171747186037}{PICC\_DumpToSerial}}(\mbox{\hyperlink{structMFRC522_1_1Uid}{Uid}} *uid);}
+\DoxyCodeLine{305     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_aa45876e611a99b9b6d8ae2d4117d3976}{PICC\_DumpMifareClassicToSerial}}(\mbox{\hyperlink{structMFRC522_1_1Uid}{Uid}} *uid, \textcolor{keywordtype}{byte} piccType, \mbox{\hyperlink{structMFRC522_1_1MIFARE__Key}{MIFARE\_Key}} *key);}
+\DoxyCodeLine{306     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_a20c559f09927a7c5f91295f6158e4342}{PICC\_DumpMifareClassicSectorToSerial}}(\mbox{\hyperlink{structMFRC522_1_1Uid}{Uid}} *uid, \mbox{\hyperlink{structMFRC522_1_1MIFARE__Key}{MIFARE\_Key}} *key, \textcolor{keywordtype}{byte} sector);}
+\DoxyCodeLine{307     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_ac148d28877dd577606a28e9e7e4b6809}{PICC\_DumpMifareUltralightToSerial}}();}
+\DoxyCodeLine{308     \textcolor{keywordtype}{void} \mbox{\hyperlink{classMFRC522_ab8c712963189654e9bc368be8783e2ab}{MIFARE\_SetAccessBits}}(\textcolor{keywordtype}{byte} *accessBitBuffer, \textcolor{keywordtype}{byte} g0, \textcolor{keywordtype}{byte} g1, \textcolor{keywordtype}{byte} g2, \textcolor{keywordtype}{byte} g3);}
+\DoxyCodeLine{309     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classMFRC522_a925607adc9382720c222578bd236a9c8}{MIFARE\_OpenUidBackdoor}}(\textcolor{keywordtype}{bool} logErrors);}
+\DoxyCodeLine{310     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classMFRC522_a2bdc18af4952ce99099607c84139b51c}{MIFARE\_SetUid}}(\textcolor{keywordtype}{byte} *newUid, \textcolor{keywordtype}{byte} uidSize, \textcolor{keywordtype}{bool} logErrors);}
+\DoxyCodeLine{311     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classMFRC522_afcbb15d925cb3bea9f58595111fbca48}{MIFARE\_UnbrickUidSector}}(\textcolor{keywordtype}{bool} logErrors);}
+\DoxyCodeLine{312     }
+\DoxyCodeLine{314     \textcolor{comment}{// Convenience functions -\/ does not add extra functionality}}
+\DoxyCodeLine{316 \textcolor{comment}{}    \textcolor{keywordtype}{bool} \mbox{\hyperlink{classMFRC522_a3adca9d3b455c680ebcde3b74c4e567b}{PICC\_IsNewCardPresent}}();}
+\DoxyCodeLine{317     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classMFRC522_aab1218c71cec9cc17ee3ac8a683df106}{PICC\_ReadCardSerial}}();}
+\DoxyCodeLine{318     }
+\DoxyCodeLine{319 \textcolor{keyword}{private}:}
+\DoxyCodeLine{320     \textcolor{keywordtype}{byte} MIFARE\_TwoStepHelper(\textcolor{keywordtype}{byte} command, \textcolor{keywordtype}{byte} blockAddr, \textcolor{keywordtype}{long} data);}
+\DoxyCodeLine{321 \};}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

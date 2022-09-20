@@ -1,0 +1,1 @@
+cmd_/home/jmiranda/Documents/Embebidos1SEM/Code/Buzzer_Driver/buzz.mod := { echo  /home/jmiranda/Documents/Embebidos1SEM/Code/Buzzer_Driver/buzzmodule.o /home/jmiranda/Documents/Embebidos1SEM/Code/Buzzer_Driver/utils.o;  echo; } > /home/jmiranda/Documents/Embebidos1SEM/Code/Buzzer_Driver/buzz.mod

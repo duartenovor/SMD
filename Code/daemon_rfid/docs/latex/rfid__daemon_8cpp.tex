@@ -1,0 +1,131 @@
+\hypertarget{rfid__daemon_8cpp}{}\doxysection{src/rfid\+\_\+daemon.cpp File Reference}
+\label{rfid__daemon_8cpp}\index{src/rfid\_daemon.cpp@{src/rfid\_daemon.cpp}}
+
+
+Process that reads the rfid sensor.  
+
+
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$mqueue.\+h$>$}\newline
+{\ttfamily \#include $<$sys/syslog.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}MFRC522.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{rfid__daemon_8cpp_a2e6eba6a010e5e082f5a0d3d432cfb60}{MSGQOBJ\+\_\+\+VERPAT}}~\char`\"{}/rfid\+\_\+queue\+\_\+verpat\char`\"{}
+\item 
+\#define \mbox{\hyperlink{rfid__daemon_8cpp_ad254836014eb6ed14a6da96e830d8933}{MSGQOBJ\+\_\+\+NEWPAT}}~\char`\"{}/rfid\+\_\+queue\+\_\+newpat\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{rfid__daemon_8cpp_acede3d59d9769802f6cd52aac9c09961}{create\+\_\+daemon}} ()
+\item 
+void \mbox{\hyperlink{rfid__daemon_8cpp_adbaf4c5eb2c3233dac4d2ba1aca25d5c}{create\+\_\+mqueues}} ()
+\item 
+void \mbox{\hyperlink{rfid__daemon_8cpp_a1bf23cb353ee74215410998616c0ccf1}{delete\+\_\+mqueues}} ()
+\item 
+int \mbox{\hyperlink{rfid__daemon_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{rfid__daemon_8cpp_acd2838a7c77b5b70233d7e34c21d1a3f}\label{rfid__daemon_8cpp_acd2838a7c77b5b70233d7e34c21d1a3f}} 
+mqd\+\_\+t {\bfseries msgq\+\_\+id\+\_\+verpat}
+\item 
+\mbox{\Hypertarget{rfid__daemon_8cpp_a7d9c8f8cd539d47680c0ad95a989c5b1}\label{rfid__daemon_8cpp_a7d9c8f8cd539d47680c0ad95a989c5b1}} 
+mqd\+\_\+t {\bfseries msgq\+\_\+id\+\_\+newpat}
+\item 
+mqd\+\_\+t \mbox{\hyperlink{rfid__daemon_8cpp_a0a5526864451ceb0e247abd06a470fb6}{msgq\+\_\+id}}
+\item 
+int \mbox{\hyperlink{rfid__daemon_8cpp_a89f234133d3efe315836311cbf21c64b}{state}} = 1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Process that reads the rfid sensor. 
+
+\begin{DoxyAuthor}{Author}
+Joao Miranda and Duarte Rodrigues 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+19-\/01-\/2021 
+\end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{rfid__daemon_8cpp_ad254836014eb6ed14a6da96e830d8933}\label{rfid__daemon_8cpp_ad254836014eb6ed14a6da96e830d8933}} 
+\index{rfid\_daemon.cpp@{rfid\_daemon.cpp}!MSGQOBJ\_NEWPAT@{MSGQOBJ\_NEWPAT}}
+\index{MSGQOBJ\_NEWPAT@{MSGQOBJ\_NEWPAT}!rfid\_daemon.cpp@{rfid\_daemon.cpp}}
+\doxysubsubsection{\texorpdfstring{MSGQOBJ\_NEWPAT}{MSGQOBJ\_NEWPAT}}
+{\footnotesize\ttfamily \#define MSGQOBJ\+\_\+\+NEWPAT~\char`\"{}/rfid\+\_\+queue\+\_\+newpat\char`\"{}}
+
+Message queue used to send the RFID added or error message mqd\+\_\+t type, which is used for message queue descriptors \mbox{\Hypertarget{rfid__daemon_8cpp_a2e6eba6a010e5e082f5a0d3d432cfb60}\label{rfid__daemon_8cpp_a2e6eba6a010e5e082f5a0d3d432cfb60}} 
+\index{rfid\_daemon.cpp@{rfid\_daemon.cpp}!MSGQOBJ\_VERPAT@{MSGQOBJ\_VERPAT}}
+\index{MSGQOBJ\_VERPAT@{MSGQOBJ\_VERPAT}!rfid\_daemon.cpp@{rfid\_daemon.cpp}}
+\doxysubsubsection{\texorpdfstring{MSGQOBJ\_VERPAT}{MSGQOBJ\_VERPAT}}
+{\footnotesize\ttfamily \#define MSGQOBJ\+\_\+\+VERPAT~\char`\"{}/rfid\+\_\+queue\+\_\+verpat\char`\"{}}
+
+\texorpdfstring{$<$}{<}file descriptor \texorpdfstring{$<$}{<} mq\+\_\+$\ast$ functions \texorpdfstring{$<$}{<} syslog \texorpdfstring{$<$}{<} signals \texorpdfstring{$<$}{<} usleep \texorpdfstring{$<$}{<} strlen \texorpdfstring{$<$}{<} Includes used to RFID use Message queue used to send the RFID searched and matched 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{rfid__daemon_8cpp_acede3d59d9769802f6cd52aac9c09961}\label{rfid__daemon_8cpp_acede3d59d9769802f6cd52aac9c09961}} 
+\index{rfid\_daemon.cpp@{rfid\_daemon.cpp}!create\_daemon@{create\_daemon}}
+\index{create\_daemon@{create\_daemon}!rfid\_daemon.cpp@{rfid\_daemon.cpp}}
+\doxysubsubsection{\texorpdfstring{create\_daemon()}{create\_daemon()}}
+{\footnotesize\ttfamily void create\+\_\+daemon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+create daemon -\/\texorpdfstring{$>$}{>} create the dameon \begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{rfid__daemon_8cpp_adbaf4c5eb2c3233dac4d2ba1aca25d5c}\label{rfid__daemon_8cpp_adbaf4c5eb2c3233dac4d2ba1aca25d5c}} 
+\index{rfid\_daemon.cpp@{rfid\_daemon.cpp}!create\_mqueues@{create\_mqueues}}
+\index{create\_mqueues@{create\_mqueues}!rfid\_daemon.cpp@{rfid\_daemon.cpp}}
+\doxysubsubsection{\texorpdfstring{create\_mqueues()}{create\_mqueues()}}
+{\footnotesize\ttfamily void create\+\_\+mqueues (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+create mqueues -\/\texorpdfstring{$>$}{>} create the two mqueues \begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{rfid__daemon_8cpp_a1bf23cb353ee74215410998616c0ccf1}\label{rfid__daemon_8cpp_a1bf23cb353ee74215410998616c0ccf1}} 
+\index{rfid\_daemon.cpp@{rfid\_daemon.cpp}!delete\_mqueues@{delete\_mqueues}}
+\index{delete\_mqueues@{delete\_mqueues}!rfid\_daemon.cpp@{rfid\_daemon.cpp}}
+\doxysubsubsection{\texorpdfstring{delete\_mqueues()}{delete\_mqueues()}}
+{\footnotesize\ttfamily void delete\+\_\+mqueues (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Function that help to change the state of the system
+
+delete mqueues -\/\texorpdfstring{$>$}{>} delete both mqueues after kill command \begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{rfid__daemon_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{rfid__daemon_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{rfid\_daemon.cpp@{rfid\_daemon.cpp}!main@{main}}
+\index{main@{main}!rfid\_daemon.cpp@{rfid\_daemon.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\texorpdfstring{$<$}{<} SIGNAL TO INSERT NEW PATIENT
+
+\texorpdfstring{$<$}{<} SIGNAL TO INSERT NEW PATIENT
+
+\texorpdfstring{$<$}{<} catch KILL SIGNAL
+
+\texorpdfstring{$<$}{<} Send PID to main program
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{rfid__daemon_8cpp_a0a5526864451ceb0e247abd06a470fb6}\label{rfid__daemon_8cpp_a0a5526864451ceb0e247abd06a470fb6}} 
+\index{rfid\_daemon.cpp@{rfid\_daemon.cpp}!msgq\_id@{msgq\_id}}
+\index{msgq\_id@{msgq\_id}!rfid\_daemon.cpp@{rfid\_daemon.cpp}}
+\doxysubsubsection{\texorpdfstring{msgq\_id}{msgq\_id}}
+{\footnotesize\ttfamily mqd\+\_\+t msgq\+\_\+id}
+
+Variable that indicates the state of program \{1-\/\texorpdfstring{$>$}{>}run\} \mbox{\Hypertarget{rfid__daemon_8cpp_a89f234133d3efe315836311cbf21c64b}\label{rfid__daemon_8cpp_a89f234133d3efe315836311cbf21c64b}} 
+\index{rfid\_daemon.cpp@{rfid\_daemon.cpp}!state@{state}}
+\index{state@{state}!rfid\_daemon.cpp@{rfid\_daemon.cpp}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily int state = 1}
+
+Prototype Functions about init and close tools used 
